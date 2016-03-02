@@ -14,6 +14,9 @@ func main() {
 }
 
 func handleIndex(res http.ResponseWriter, req *http.Request) {
+	if req.Method != "GET" {
+		http.Error(res, "Method not allowed", http.StatusMethodNotAllowed)
+	}
 	res.Header().Set("Content-Type", "application/json")
 	msg, _ := json.Marshal(map[string]string{"message": "Hello"})
 

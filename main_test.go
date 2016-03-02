@@ -25,3 +25,14 @@ func TestIndexHandler(t *testing.T) {
 		t.Errorf(`Expected: %s, Actual: %s`, expected, res.Body)
 	}
 }
+
+func TestIndexHandlerAllowOnlyGetMethod(t *testing.T) {
+	req, _ := http.NewRequest("OPTION", "/", nil)
+	res := httptest.NewRecorder()
+
+	handleIndex(res, req)
+
+	if res.Code != 405 {
+		t.Errorf("Expected: 405, Actual: %d", res.Code)
+	}
+}
