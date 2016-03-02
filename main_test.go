@@ -19,4 +19,9 @@ func TestIndexHandler(t *testing.T) {
 	if res.Header().Get("Content-Type") != "application/json" {
 		t.Errorf("Expected: application/json, Actual: %s", res.Header().Get("Content-Type"))
 	}
+
+	expected := `{"message":"Hello"}`
+	if res.Body.String() != expected {
+		t.Errorf(`Expected: %s, Actual: %s`, expected, res.Body)
+	}
 }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 )
@@ -14,5 +15,7 @@ func main() {
 
 func handleIndex(res http.ResponseWriter, req *http.Request) {
 	res.Header().Set("Content-Type", "application/json")
-	res.Write([]byte("Hello World"))
+	msg, _ := json.Marshal(map[string]string{"message": "Hello"})
+
+	res.Write(msg)
 }
