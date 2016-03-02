@@ -6,13 +6,17 @@ import (
 	"testing"
 )
 
-func TestHandleIndexReturnWithStatusOK(t *testing.T) {
+func TestIndexHandler(t *testing.T) {
 	req, _ := http.NewRequest("GET", "/", nil)
 	res := httptest.NewRecorder()
 
 	handleIndex(res, req)
 
-	if res.Code != http.StatusOK {
-		t.Errorf("Expected: %v, Actual: %v", "200", res.Code)
+	if res.Code != 200 {
+		t.Errorf("Expected: 200, Actual: %d", res.Code)
+	}
+
+	if res.Header().Get("Content-Type") != "application/json" {
+		t.Errorf("Expected: application/json, Actual: %s", res.Header().Get("Content-Type"))
 	}
 }
